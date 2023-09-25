@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
-import { authAPI } from "api/todolists-api";
-import { authActions } from "features/Login/auth-reducer";
+import { authActions } from "features/auth/auth.reducer";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { authAPI } from "features/auth/auth.api";
 
 const initialState = {
   status: "idle" as RequestStatusType,
@@ -10,6 +10,7 @@ const initialState = {
 };
 
 export type AppInitialStateType = typeof initialState;
+export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
 
 const slice = createSlice({
   name: "app",
@@ -40,5 +41,3 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
     dispatch(appActions.setAppInitialized({ isInitialized: true }));
   });
 };
-
-export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
